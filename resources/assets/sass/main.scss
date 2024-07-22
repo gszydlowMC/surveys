@@ -1,0 +1,582 @@
+html {
+    font-size: $font-size-base;
+
+    @media (max-width: 767px) {
+        font-size: $font-size-mobile-base;
+    }
+
+}
+
+body {
+    font-family: $font-family-base;
+    box-sizing: border-box;
+    min-height: 100vh;
+    color: $color-base;
+}
+
+p {
+    margin: 0;
+}
+
+a {
+    font-weight: 400;
+    color: $color-base;
+    font-size: $font-size-base;
+    line-height: $line-height-to-base;
+}
+
+a.active:hover{
+    color: $color-base !important;
+    background:#fff !important;
+}
+a:hover{
+    color: $color-active !important;
+    background:#fff !important;
+}
+
+
+a.active{
+    color:$color-danger !important;
+}
+
+a.btn.active{
+    background:$color-danger !important;
+    color:#fff !important;
+}
+.button-main:hover{
+    background: $color-base !important;
+    color:#fff !important;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-type {
+    color: $bg-base;
+    font-size: $font-size-base;
+}
+
+.text-type-2 {
+    color: $color-border;
+    font-size: $font-size-small;
+}
+
+.text-type-3 {
+    color: $color-active;
+    font-size: $font-size-base;
+}
+
+.text-dark-1 {
+    font-size: $font-size-base;
+    line-height: $line-height-to-base;
+    font-weight: 400;
+}
+
+h2, h3, h4, h5, h6 {
+    font-weight: 400;
+    color: $color-base;
+}
+
+h2 {
+    font-size: 24px;
+    line-height: 30px;
+}
+
+h3 {
+    font-size: 20px;
+    line-height: 21.4px;
+    font-weight: 500;
+    color: $color-danger;
+}
+
+h4 {
+    @extend .text-dark-1
+}
+
+h5 {
+    font-size: $font-size-small;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.swal2-title {
+    box-sizing: border-box;
+    background: $color-active;
+    color: #fff;
+    font-size: $font-size-large;
+    line-height: $line-height-to-large;
+    font-weight: 400;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding:10px;
+}
+
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    color: #fff;
+
+    background-color: $bg-footer;
+
+    .social {
+        a {
+            margin: 0 .5rem;
+        }
+    }
+
+    .copyright {
+        font-size: .75rem;
+    }
+
+    //margin-top: 50px;
+}
+
+header {
+    background-color: #ffffff;
+    color: $color-base !important;
+}
+
+.nav-link{
+    color: $color-base !important;
+}
+
+#main-wrapper {
+    min-height: calc(100vh - 420px);
+}
+
+
+.text-red-600 {
+    color: $color-danger;
+}
+
+.text-header {
+    font-size: $font-size-large;
+    line-height: $line-height-to-large;
+    color: $color-base;
+    text-decoration: none;
+}
+
+.menu-categories {
+    .mc-item {
+        border-bottom: 1px solid $color-border;
+        padding-top: 20px;
+        padding-bottom: 0;
+
+        a {
+            @extend .text-header;
+        }
+
+        a:hover, a.active {
+            color: $color-active;
+        }
+    }
+}
+
+.menu-tree-files {
+    li {
+        border-bottom: 1px solid $color-border;
+        padding-top: 20px;
+        padding-bottom: 10px;
+
+        a {
+            @extend .text-header;
+        }
+    }
+}
+
+ul {
+    list-style: none;
+}
+
+ul.category-menu {
+    li a {
+        font-size: $font-size-base;
+        line-height: $line-height-to-base;
+        color: $color-base;
+        text-decoration: none;
+    }
+}
+
+.search-input {
+    background: #fff url('/img/icons/search.png') no-repeat center right;
+}
+
+ul.user-menu-tree {
+    list-style: none;
+
+    li {
+        a {
+            font-size: $font-size-large;
+            line-height: $line-height-to-large;
+            color: $color-base;
+            text-decoration: none;
+            border-bottom: 1px solid $color-border;
+            display: block;
+            width: 100%;
+            padding: 15px 5px 5px 5px;
+        }
+
+        a.active {
+            color: $color-active;
+        }
+
+        ul {
+            padding-left: 1rem;
+
+            li {
+                a {
+                    font-size: $font-size-base;
+                    line-height: $line-height-to-base;
+                    border-bottom: none;
+                }
+            }
+        }
+    }
+}
+
+ul.menu-collapse {
+    li {
+        a {
+            font-size: $font-size-base;
+            line-height: $line-height-to-base;
+            text-decoration: none;
+            color: $color-base;
+            font-weight: 400;
+        }
+
+        a.plain {
+            font-weight: 400;
+
+        }
+
+        padding: 10px 0px 10px 10px;
+        border-bottom: 1px solid $color-border-white;
+
+        ul {
+            padding: 0;
+
+            li {
+                border-bottom: none;
+
+                a {
+                    font-size: $font-size-small;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}
+
+ul li a.li-title {
+    padding-left: 5px;
+}
+
+ul li ul li a.li-title {
+    padding-left: 35px;
+}
+
+ul li ul li ul li a.li-title {
+    padding-left: 65px;
+}
+
+ul li ul li ul li ul li a.li-title {
+    padding-left: 95px;
+}
+
+ul li ul li ul li ul li ul li a.li-title {
+    padding-left: 125px;
+}
+
+ul li ul li ul li ul li ul li ul li a.li-title {
+    padding-left: 155px;
+}
+
+ul.pagination {
+    li.page-item {
+        span, a {
+            border: none;
+            background: #fff;
+            font-size: 16px;
+            line-height: 20px;
+            color: $color-base;
+            font-weight: 400;
+        }
+    }
+
+    li.page-item.active {
+        span, a {
+            font-weight: 400;
+        }
+    }
+}
+
+.sortable-compontent {
+    table {
+        tr {
+            th, td {
+                font-size: $font-size-base;
+                line-height: $line-height-to-base;
+                color: $color-base;
+                padding: 0.75rem 0.5rem;
+
+                a {
+                    font-size: $font-size-base;
+                    text-decoration: none;
+                }
+
+                border: none;
+            }
+
+            th {
+                a {
+                    font-weight: 600;
+                }
+
+                i {
+                    position: relative;
+                    top: 2px;
+                }
+
+            }
+        }
+
+        thead tr {
+            border: none;
+        }
+    }
+}
+
+.filters-list {
+    border-bottom: 1px solid $color-border-white;
+
+    ul {
+        display: block;
+        float: left;
+        margin: 0;
+        width: 100%;
+
+        li {
+            display: inline-block;
+            margin-right: 20px;
+
+            a {
+                font-size: $font-size-base;
+                line-height: $line-height-to-base;
+                color: $color-base;
+                font-weight: 400;
+                text-decoration: none;
+            }
+
+            a:hover, a.active {
+                color: $color-active;
+            }
+        }
+    }
+
+    .daterangepicker {
+        bottom: 5px;
+        left: 0;
+    }
+}
+
+a {
+    text-decoration: none;
+
+    :hover, .active {
+        color: $color-active;
+    }
+}
+
+#menu-tree {
+    ul {
+        margin: 0;
+        padding-left: 25px;
+        line-height: 2em;
+        list-style: none;
+        background-color: #fff;
+    }
+
+    ul li {
+        position: relative;
+    }
+
+    ul li .li-content .inactive {
+        color: $color-inactive;
+    }
+
+    ul li .li-content {
+        padding: 10px 0;
+        font-size: $font-size-large;
+        line-height: $line-height-to-large;
+        color: $color-base;
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid #eee;
+    }
+
+    ul li:before {
+        position: absolute;
+        top: 0;
+        left: -15px;
+        display: block;
+        width: 15px;
+        height: 1.2em;
+        content: "";
+        border-bottom: 1px solid $color-base;
+        border-left: 1px solid $color-base;
+    }
+
+    ul.tree > li:first-child:before {
+        border-left: none;
+    }
+
+    ul li:after {
+        position: absolute;
+        top: 1.1em;
+        bottom: 1px;
+        left: -15px;
+        display: block;
+        content: "";
+        border-left: 1px solid $color-base;
+    }
+
+    /* hide the lines on the last item */
+    ul li:last-child:after {
+        display: none;
+    }
+
+    .sortable-empty {
+        display: none;
+    }
+
+    .ph {
+        display: block;
+        min-height: 5px;
+        line-height: 1.2em;
+        background: $color-highlight;
+        width: 100%;
+    }
+
+    .hide-before:before {
+        display: none !important;
+    }
+}
+
+
+//controls
+.form-control, {
+    border-radius: 5px;
+    border: 1px solid $color-border;
+    color:$color-border;
+}
+
+label {
+    font-size: $font-size-base;
+    line-height: $line-height-to-base;
+    color: $color-base;
+}
+
+button, .btn {
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: background-color .3s ease;
+}
+
+button:hover, .btn:hover{
+    background:$color-active;
+    color:#fff;
+}
+
+.btn.cancel {
+
+    color: $color-base;
+    border: none;
+    background: #fff;
+    font-size: $font-size-base;
+    line-height: $line-height-to-base;
+}
+
+.bg-main-first {
+    background: $bg-base;
+    color: #fff;
+}
+
+.button-main {
+    background: $color-active;
+    color: #fff;
+
+    :hover{
+        background: $color-base;
+
+    }
+}
+
+.button-save{
+    background: $color-active;
+    color: #fff;
+}
+
+.button-light {
+    background: #fff;
+    color: $color-base;
+    border: 1px solid $color-base;
+
+    &:hover {
+        border: 1px solid $color-active;
+        background: $color-active;
+        color: $bg-footer;
+    }
+}
+
+.button-white {
+    border: 1px solid $color-base;
+    color: $color-base;
+    background: #fff;
+}
+
+
+.bg-main-second {
+    background: $color-base;
+    color: #fff;
+}
+
+.btn-small {
+    padding: 10px 20px;
+    font-size: $font-size-base;
+    line-height: $line-height-to-base;
+}
+
+.invalid-feedback {
+    display: block;
+}
+
+.form-check-input {
+    border: 1px solid $color-border;
+}
+
+.form-check-input:checked {
+    border: 1px solid $color-border;
+    background-color: $color-active;
+    color: $color-border;
+}
+
+.swal-button--confirm {
+    background: $color-active;
+    color: #fff;
+}
+
+.swal2-confirm {
+    background-color: $color-active !important;
+
+}
+
+.auth-form{
+    .button-main{
+        background:$bg-base;
+        color:#fff;
+    }
+}
