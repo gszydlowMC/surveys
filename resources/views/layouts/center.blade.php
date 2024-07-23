@@ -6,38 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name', 'Aplikacja webowa') }}</title>
+    <title>{{ config('app.name', 'DS - materiały reklamowe') }}</title>
     <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}"/>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="{{asset('css/app.css')}}?{{ date('YmdHis') }}">
     <script src="{{asset('js/app.js')}}?{{ date('YmdHis') }}"></script>
-    @yield('header-scripts')
 </head>
 <body>
-<header></header>
+@include('partials.header')
+<img class="img-fluid w-100" src="{{$SETTINGS_GLOBAL['BANNER_FILE_PATH'] ?? asset('img/banners/banner.png')}}"
+     alt="">
 <div id="main-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-11 mx-auto">
-                <div class="row">
-                    <div class="col-xxl-3 col-sm-12">
-                        @yield('menu')
-                    </div>
-                    <div class="col-xxl-9">
-                        <div>
-                            @yield('content')
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
+    <div id="content">
+        @yield('content')
     </div>
-
 </div>
-<footer></footer>
+@include('partials.footer')
 </body>
 </html>
 @yield('session-scripts')
-@yield('other-scripts')
+

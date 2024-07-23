@@ -1,23 +1,22 @@
 //fonts
-$font-family-base: 'CitroenType', sans-serif;
+$font-family-base: 'Nunito', sans-serif;
 //font-size
 $font-size-mobile-base: 14px;
 $font-size-small: 14px;
 $font-size-base: 16px;
 $font-size-large: 18px;
 
-$line-height-to-large: 19.26px;
-$line-height-to-base: 17.12px;
+$line-height-to-large: 20px;
+$line-height-to-base: 20px;
 
 //backgrounds
-$bg-base:#57718A;
-$bg-footer:#57718A;
+$bg-base:#fff;
+
+$bg-button1: #E4E9F4;
+$color-button1: #495FAC;
 
 //colors
-$color-base: #3B3938;
-$color-danger:#DA291C;
-$color-border: #7F7F7F;
-$color-active:#DA291C;
-$color-border-white:#D9D9D9;
-$color-inactive: #ccc;
-$color-highlight: #fd7e14;
+$color-base: #232323;
+$color-shadow: #6F6F6F;
+
+

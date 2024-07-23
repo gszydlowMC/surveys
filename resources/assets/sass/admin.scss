@@ -1,0 +1,49 @@
+html {
+    font-size: $font-size-base;
+
+    @media (max-width: 767px) {
+        font-size: $font-size-mobile-base;
+    }
+
+}
+
+body {
+    font-family: $font-family-base;
+    box-sizing: border-box;
+    min-height: 100vh;
+    color: $color-base;
+    background:#F1F1F1;
+}
+
+#header{
+    height:105px;
+    background:#fff;
+    width:100%;
+    margin:0;
+    display:block;
+    float:left;
+    box-shadow: 0 0 2px $color-shadow;
+}
+
+h2{
+    font-size: $font-size-large;
+    font-weight: 600;
+    line-height: $line-height-to-large;
+    color:$color-base;
+}
+
+.btn-primary{
+    background:$bg-button1;
+    color:$color-button1;
+    border:none;
+    font-size: $font-size-base;
+    line-height: $line-height-to-base;
+    padding:10px;
+}
+
+.box-left{
+    width:100%;
+    float:left;
+    background:#fff;
+    border-radius:10px;
+}
