@@ -14,3 +14,4 @@ import "jquery-ui/dist/jquery-ui.min";
 import "daterangepicker";
 
 import './others';
+import './submit';

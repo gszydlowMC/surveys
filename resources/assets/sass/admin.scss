@@ -12,38 +12,134 @@ body {
     box-sizing: border-box;
     min-height: 100vh;
     color: $color-base;
-    background:#F1F1F1;
+    background: #F1F1F1;
 }
 
-#header{
-    height:105px;
-    background:#fff;
-    width:100%;
-    margin:0;
-    display:block;
-    float:left;
+#header {
+    height: 105px;
+    background: #fff;
+    width: 100%;
+    margin: 0;
+    display: block;
+    float: left;
     box-shadow: 0 0 2px $color-shadow;
 }
 
-h2{
+h2 {
     font-size: $font-size-large;
     font-weight: 600;
     line-height: $line-height-to-large;
-    color:$color-base;
+    color: $color-base;
 }
 
-.btn-primary{
-    background:$bg-button1;
-    color:$color-button1;
-    border:none;
+.btn-primary {
+    background: $bg-button1;
+    color: $color-button1;
+    border: none;
     font-size: $font-size-base;
     line-height: $line-height-to-base;
-    padding:10px;
+    padding: 10px 30px;
+    border-radius: 10px;
 }
 
-.box-left{
-    width:100%;
-    float:left;
-    background:#fff;
-    border-radius:10px;
+.btn-secondary {
+    background: #fff;
+    color: $color-active;
+    border: 1px solid $color-active;
+    font-size: $font-size-base;
+    line-height: $line-height-to-base;
+    padding: 9px 29px;
+    border-radius: 10px;
+}
+
+.btn-secondary:hover {
+    background: $color-active;
+    color: #fff;
+}
+
+.box-left {
+    width: 100%;
+    float: left;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.invalid-feedback {
+    display: block;
+}
+
+a {
+    text-decoration: none;
+}
+
+table {
+    tr {
+        border: 0;
+    }
+
+    th {
+
+        color: $color-second;
+        font-size: 14px;
+        line-height: 20px;
+        border: 0;
+
+    }
+
+    td {
+        color: $color-base;
+        font-size: $font-size-base;
+        line-height: 26px;
+        font-weight: 400;
+        border: 0;
+    }
+
+    th, td {
+        a{
+            color: $color-second;
+            font-size: 14px;
+            line-height: 20px;
+            border: 0;
+            text-decoration: none;
+        }
+    }
+
+}
+
+.nav-up {
+    li {
+        a {
+            color: $color-base;
+            font-size: $font-size-base;
+            line-height: $line-height-to-base;
+        }
+    }
+
+    li.active {
+        border-bottom: 4px solid #495FAC;
+    }
+}
+
+label {
+    font-size: 16px;
+    line-height: 26px;
+    color: $color-base;
+    font-weight: 600;
+    margin-bottom: 0.3rem !important;
+}
+
+.form-control {
+    border: none;
+    color: $color-second;
+    font-size: 16px;
+    line-height: 26px;
+    border-bottom: 1px solid #C9C9C9;
+    border-radius: 0;
+}
+
+.form-control:focus {
+    border: none;
+    border-bottom: 1px solid #0d6efd;
+    border-radius: 0;
+    box-shadow: none;
 }

@@ -18,11 +18,13 @@
     <div class="container-fluid">
         <div class="row mt-4">
             <div class="col-3">
-                <h2 class="mt-3">Tworzenie ankiety</h2>
+                <h2 class="mt-3">
+                    @yield('header-title')
+                </h2>
             </div>
             <div class="col-9">
                 <div class="float-end">
-                    <a class="btn btn-primary mt-2">Wyślij ankietę</a>
+                    @yield('header-button')
                 </div>
             </div>
         </div>
@@ -49,6 +51,12 @@
             @endif
         </div>
 
+    </div>
+</div>
+<div class="modal fade" id="mainModalAdmin" tabindex="-1" aria-modal="true" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+        </div>
     </div>
 </div>
 </body>

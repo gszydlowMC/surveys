@@ -1,4 +1,4 @@
-@extends('layouts.center')
+@extends('_partials.layouts.auth')
 @section('content')
     <div class="container">
         <div class="row my-2">
@@ -13,7 +13,8 @@
                                 @csrf
                                 <div class="form-group">
                                     <label class="form-label" for="email">Login</label>
-                                    <input type="email" id="email"  name="email" placeholder="Wpisz login" class="form-control"/>
+                                    <input type="email" id="email" name="email" placeholder="Wpisz login"
+                                           class="form-control"/>
                                     @error('email')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -21,7 +22,8 @@
 
                                 <div class="form-group mt-4">
                                     <label class="form-label" for="password">Hasło</label>
-                                    <input id="password" class="form-control" type="password" name="password" placeholder="Wpisz hasło"/>
+                                    <input id="password" class="form-control" type="password" name="password"
+                                           placeholder="Wpisz hasło"/>
                                     @error('password')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -47,4 +49,4 @@
         </div>
     </div>
 @endsection
-@include('partials.session_messages')
+@include('_partials.session_messages')

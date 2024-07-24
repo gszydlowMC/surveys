@@ -39,61 +39,6 @@ $(document).ready(function (e) {
         return false;
     });
 
-    $('.table-container .sright').on('click mouseenter', function (e) {
-        var leftPos = $(this).parent().scrollLeft();
-        $(this).parent().animate({scrollLeft: leftPos + 400}, 400);
-    });
-
-    $('.table-container .sleft').on('click mouseenter', function (e) {
-        var leftPos = $(this).parent().scrollLeft();
-        $(this).parent().animate({scrollLeft: leftPos - 400}, 400);
-    });
-
-    $(document).on('change', '.EDataTable select[name="tableWidthConfig"]', function (e) {
-        const width = $(this).val();
-        const dt = $(this).parents('.EDataTable');
-        if (dt.length) {
-            dt.css({'width': width + '%'});
-            if (dt.outerWidth() > dt.parent().width()) {
-                $(this).parents('.table-container').find('.sign_direction').show();
-                $(this).parents('table').find('th, td').addClass('autoWidth');
-            } else {
-                $(this).parents('.table-container').find('.sign_direction').hide();
-                $(this).parents('table').find('th, td').removeClass('autoWidth');
-            }
-        }
-    });
-
-    setTimeout(function () {
-        if ($('.EDataTable.sticky').length) {
-            $('.EDataTable.sticky').each(function () {
-                const table = $(this);
-                if (table.outerWidth() > table.parent().width()) {
-                    $(this).parents('.table-container').find('.sign_direction').show();
-                    $(this).parents('table').find('th, td').addClass('autoWidth');
-                } else {
-                    $(this).parents('.table-container').find('.sign_direction').hide();
-                    $(this).parents('table').find('th, td').removeClass('autoWidth');
-                }
-            });
-        }
-    }, 1000);
-
-
-    $('.dt_copy_url').on('click', function () {
-        const filters = $(this).parents(".EDataTable").find(".filters :input").filter(function (index, element) {
-            return $(element).val() != '';
-        }).serialize();
-        let url = document.URL.split('?');
-        let out = url[0] + '?' + filters;
-
-        const $txt = $('<textarea />');
-        $txt.val(out).css({width: "1px", height: "1px"}).appendTo('body');
-        $txt.select();
-        if (document.execCommand('copy')) {
-            $txt.remove();
-        }
-    });
     select2Init();
 
     $('.select-all').on('click', function () {
@@ -130,30 +75,6 @@ $(document).ready(function (e) {
             });
         });
     }
-
-    // if ($('ol.search-tree-enable').length) {
-    //     $('.table-search').on('change', function () {
-    //         var value = $(this).val().toLowerCase();
-    //         const a = [];
-    //         $("ol.search-tree-enable li .toggle").filter(function () {
-    //             if ($(this).text().trim().toLowerCase().indexOf(value.toLowerCase()) > -1) {
-    //                 $(this).closest('li').removeClass('d-none');
-    //                 a.push($(this));
-    //             }else{
-    //                 $(this).closest('li').addClass('d-none');
-    //             }
-    //         });
-    //
-    //         if (a.length > 0) {
-    //             $('.search-container .text-find').addClass('text-success');
-    //             $('.search-container .text-find').html('Znaleziono '+a.length+' elementów.');
-    //             setTimeout(function(){
-    //                 $('.search-container .text-find').removeClass('text-success');
-    //                 $('.search-container .text-find').html('');
-    //             },3000)
-    //         }
-    //     });
-    // }
 
     if ($('.search-tree-enable').length) {
         $('.table-search').on('change', function () {
@@ -213,6 +134,24 @@ $(document).ready(function (e) {
 
     $(document).on('click', '.collapse-item .bx-chevron-up', function () {
         $(this).addClass('bx-chevron-down').removeClass('bx-chevron-up');
+    });
+
+    $(document).on('shown.bs.modal', '#mainModalAdmin', function (e) {
+        const a = e.relatedTarget;
+        const url = a.dataset.url;
+        const modal = e.target;
+
+        $(modal).find('.modal-content').html('');
+        $.get(url, {}, function (response) {
+            $(modal).find('.modal-content').html(response);
+            select2Init();
+        }).fail(function () {
+            alert("error");
+        });
+    });
+
+    $(document).on('hide.bs.modal', '#mainModalAdmin', function (e) {
+        $(e.currentTarget).find('.modal-content').html('');
     });
 });
 

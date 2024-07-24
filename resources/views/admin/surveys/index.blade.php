@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('partials.layouts.admin')
 {{--@section('content')--}}
 
 {{--@section('menu-left')--}}
@@ -36,7 +36,7 @@
                     Pytanie 1
                 </div>
                 <div class="card-body">
-test
+                    test
                 </div>
             </div>
         </div>

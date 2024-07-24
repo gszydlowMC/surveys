@@ -1,4 +1,4 @@
-@extends('layouts.center')
+@extends('partials.layouts.center')
 @section('content')
     <div class="container">
         <div class="row my-2">
@@ -19,7 +19,8 @@
                                     <!-- Email Address -->
                                     <div class="form-group mt-4">
                                         <label class="form-label" for="email">Adres Email</label>
-                                        <input id="email" class="form-control" type="email" name="email" placeholder="Wpisz adres Email"/>
+                                        <input id="email" class="form-control" type="email" name="email"
+                                               placeholder="Wpisz adres Email"/>
                                         @error('email')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
