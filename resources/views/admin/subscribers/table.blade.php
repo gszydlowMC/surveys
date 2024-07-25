@@ -1,7 +1,16 @@
-<h2 class="">Osoby upoważnione do zarządzania</h2>
+<h2 class="">{{__('Lista uczestników')}}</h2>
+<div class="col-12 my-3 ps-2">
+    <a class="">
+        <i class="bx bx-trash"></i>
+        <span>{{__('Usuń')}}</span>
+    </a>
+    <a class="" data-bs-toggle="modal" data-bs-target="#importSubscribersModal"><i class="bx bx-export px-2"></i>Import</a>
+</div>
 <div class="col-12 py-2 mt-3">
+    @csrf
     @include('_components.sortable-component', [
         'config' => [
+            'checkbox' => true,
             'columns' => [
                 ['alias' => 'subscriber_group_name', 'text' => 'Grupa', 'sort' => true],
                 ['alias' => 'first_name', 'text' => 'Imię', 'sort' => true],
@@ -16,5 +25,5 @@
         ]
     ])
 </div>
-
+@include('admin.subscribers.import.modal', [])
 

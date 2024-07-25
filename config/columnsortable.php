@@ -33,7 +33,7 @@ return [
     /*
     icon that shows when generating sortable link while column is not sorted
      */
-    'sortable_icon'                 => 'bx bx-caret',
+    'sortable_icon'                 => 'bx bxs-sort-alt',
 
     /*
     generated icon is clickable non-clickable (default)

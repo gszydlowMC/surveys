@@ -5,15 +5,15 @@
             <div class="col-xxl-3 col-md-2 col-12"></div>
             <div class="col-xxl-6 col-md-8 mx-auto">
                 <div class="row">
-                    <div class="col-8 mx-auto">
-                        <div class="register-box">
-                            <h3 class="text-center my-3">Logowanie</h3>
+                    <div class="col-9 mx-auto mt-5">
+                        <div class="register-box white-box mt-5">
+                            <h2 class="text-left my-3">Logowanie</h2>
 
                             <form method="POST" action="{{ route('auth.login.store') }}" class="auth-form">
                                 @csrf
-                                <div class="form-group">
-                                    <label class="form-label" for="email">Login</label>
-                                    <input type="email" id="email" name="email" placeholder="Wpisz login"
+                                <div class="form-group mt-3">
+                                    <label class="form-label" for="email">Email</label>
+                                    <input type="email" id="email" name="email" placeholder="Wpisz adres e-mail"
                                            class="form-control"/>
                                     @error('email')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -27,16 +27,16 @@
                                     @error('password')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <p class="text-right">
-                                        <a class="text-type-2"
+                                    <p class="text-left mt-2">
+                                        <a class="auth-link"
                                            href="{{ route('auth.forgot') }}">
-                                            {{ __('Przypomnij hasło') }}
+                                            {{ __('Zapomniałeś hasło?') }}
                                         </a>
                                     </p>
                                 </div>
 
-                                <div class="form-group mt-4 text-center">
-                                    <button type="submit" class="button-main">
+                                <div class="form-group mt-4 text-center mb-3">
+                                    <button type="submit" class="btn btn-primary">
                                         {{ __('Zaloguj się') }}
                                     </button>
                                 </div>

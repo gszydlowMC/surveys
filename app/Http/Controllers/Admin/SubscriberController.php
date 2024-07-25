@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\Admin\AdminsubscriberRequest;
+use App\Http\Requests\Admin\AdminSubscriberRequest;
 use App\Models\Subscriber;
 use App\Repositories\SubscriberRepository;
 use App\Services\SubscriberService;
@@ -31,6 +31,8 @@ class SubscriberController extends BaseController
                     'subscribers.created_at',
                 ]
             );
+        $query->whereNull('deleted_at');
+
         if(!empty($search)){
             $query->whereRaw("LOWER(concat(first_name, ' ', last_name, ' ', email)) like ? ", '%' . mb_strtolower($search, 'utf-8') . '%');
         }
@@ -56,24 +58,35 @@ class SubscriberController extends BaseController
         return view('admin.subscribers.form', compact('groups', 'subscriber'));
     }
 
-    public function store(AdminsubscriberRequest $request)
+    public function store(AdminSubscriberRequest $request)
     {
         $status = $this->subscriberService->save($request->all(), null);
         return $this->handleSaveResponse($status,
-            'Pomyślnie dodano subskrybenta.',
-            'Nie udało się dodać nowego subskrybenta.',
+            'Pomyślnie dodano uczestnika.',
+            'Nie udało się dodać nowego uczestnika.',
             route('admin.subscribers.index')
         );
     }
 
-    public function update(AdminsubscriberRequest $request, $id)
+    public function update(AdminSubscriberRequest $request, $id)
     {
         $status = $this->subscriberService->save($request->all(), $id);
         return $this->handleSaveResponse($status,
-            'Pomyślnie edytowano subskrybenta.',
-            'Nie udało się edytować subskrybenta.',
+            'Pomyślnie edytowano uczestnika.',
+            'Nie udało się edytować uczestnika.',
             route('admin.subscribers.index')
 
+        );
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $isDelete = $this->subscriberService->delete($id);
+
+        return $this->handleSaveResponse($isDelete,
+            'Pomyślnie usunięto wybranego uczestnika.',
+            'Nie udało się usunąć wybranego uczestnika.',
+            route('admin.subscribers.index')
         );
     }
 

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->string('email')->unique();
             $table->string('phone')->nullable();
+            $table->timestamp('deleted_at')->nullable();
+            $table->integer('deleted_by')->nullable();
             $table->timestamps();
         });
     }

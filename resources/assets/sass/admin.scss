@@ -70,6 +70,21 @@ h2 {
 
 a {
     text-decoration: none;
+    font-size:16px;
+    color:$color-base;
+    line-height: $line-height-to-16;
+}
+
+p{
+    font-size:16px;
+    color:$color-base;
+    line-height: $line-height-to-16;
+}
+
+.auth-link {
+    color:$color-second;
+    font-size:14px;
+    line-height:20px;
 }
 
 table {
@@ -142,4 +157,33 @@ label {
     border-bottom: 1px solid #0d6efd;
     border-radius: 0;
     box-shadow: none;
+}
+
+.white-box{
+    background: #fff;
+    box-shadow: 0 4px 4px 0 #6F6F6F1A;
+    padding:10px;
+    border-radius:10px;
+}
+
+.swal-button--confirm {
+    @extend .btn-primary;
+}
+
+.swal2-confirm {
+    background: $bg-button1 !important;
+    color: $color-button1 !important;
+
+}
+
+.swal2-title {
+    box-sizing: border-box;
+    background: $color-active;
+    color: #fff;
+    font-size: $font-size-large;
+    line-height: $line-height-to-large;
+    font-weight: 400;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding:10px;
 }

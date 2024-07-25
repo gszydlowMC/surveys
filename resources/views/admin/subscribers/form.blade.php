@@ -18,6 +18,17 @@
             @endif
             <div class="row">
                 <div class="col-12">
+                    <div class="mt-3 form-group">
+                        <label for="subscriber_group_name" class="form-label" title="Wybierz z obecnych lub dodaj nową">Grupa uczestników</label>
+                        <select name="subscriber_group_name" class="form-control select2-simple tags-enable">
+                            <option value="">--Wybierz--</option>
+                            @if(!empty($form->groups ?? ''))
+                                @foreach($groups as $group)
+                                    <option value="{{$group}}" @if($form->subscriber_group_name === $group) selected="selected" @endif>{{$group}}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
                     <div class="form-group mt-3">
                         @include('_components.fields.input-text', ['config' => [
                             'label' => __('Imię'),

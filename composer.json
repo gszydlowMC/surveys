@@ -6,9 +6,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "kyslik/column-sortable": "^6.6",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
-        "kyslik/column-sortable": "^6.6"
+        "maatwebsite/excel": "^3.1"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.1",

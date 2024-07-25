@@ -4,10 +4,11 @@ namespace App\Services;
 
 
 use App\Models\Subscriber;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class SubscriberService
+class SubscriberService extends BaseService
 {
     public function __construct()
     {
@@ -47,6 +48,35 @@ class SubscriberService
             return true;
         } catch (\Exception $e) {
             DB::rollBack();
+            return false;
+        }
+    }
+
+    public function saveMultiple($inputData)
+    {
+        try {
+            DB::beginTransaction();
+            Subscriber::query()->upsert($inputData, 'email', ['first_name', 'last_name', 'phone', 'subscriber_group_name']);
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return false;
+        }
+    }
+
+    public function delete($id)
+    {
+        try {
+            $subscriber = Subscriber::query()->findOrFail($id);
+            $subscriber->fill([
+                'deleted_at' => now()->format('Y-m-d H:i:s'),
+                'deleted_by' => Auth::user()->id
+            ]);
+            $subscriber->save();
+            return true;
+        } catch (\Throwable $e) {
+            $this->error = $e->getMessage();
             return false;
         }
     }

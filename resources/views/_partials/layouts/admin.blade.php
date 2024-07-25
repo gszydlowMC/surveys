@@ -54,7 +54,7 @@
     </div>
 </div>
 <div class="modal fade" id="mainModalAdmin" tabindex="-1" aria-modal="true" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
         </div>
     </div>

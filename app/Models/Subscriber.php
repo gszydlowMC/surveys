@@ -17,6 +17,8 @@ class Subscriber extends Model
         'last_name',
         'email',
         'phone',
+        'deleted_at',
+        'deleted_by',
     ];
 
     protected $sortable = [

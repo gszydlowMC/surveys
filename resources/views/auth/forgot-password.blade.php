@@ -1,14 +1,14 @@
-@extends('partials.layouts.center')
+@extends('_partials.layouts.auth')
 @section('content')
     <div class="container">
         <div class="row my-2">
             <div class="col-xxl-3 col-md-2 col-12"></div>
             <div class="col-xxl-6 col-md-8 mx-auto">
                 <div class="row">
-                    <div class="col-8 mx-auto">
-                        <div class="forgot-box">
+                    <div class="col-9 mx-auto mt-5">
+                        <div class="forgot-box white-box mt-5">
                             <h2 class="text-center mt-3">Zapomniałeś hasło?</h2>
-                            <p>
+                            <p class="py-2">
                                 Wprowadź swój adres e-mail, a my wyślemy Ci link do resetowania hasła
                             </p>
                             <div class="login-box text-left">
@@ -28,7 +28,7 @@
 
                                     <!-- Submit Button -->
                                     <div class="form-group mt-4 text-center">
-                                        <button type="submit" class="button-main">
+                                        <button type="submit" class="btn btn-primary">
                                             {{ __('Wyślij') }}
                                         </button>
                                     </div>
@@ -42,4 +42,4 @@
         </div>
     </div>
 @endsection
-@include('partials.session_messages')
+@include('_partials.session_messages')

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ImportSubscriberController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Admin\SurveyController;
@@ -8,11 +9,18 @@ use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+Route::get('login', [AuthController::class, 'login'])
+    ->name('login');
+
+Route::get('login', [AuthController::class, 'login'])
+    ->name('login');
+
 Route::prefix('admin')->name('admin.')->middleware(['auth','admin'])->group(function () {
 //    Route::resource('questions', QuestionController::class);
     Route::resource('surveys', SurveyController::class);
     Route::resource('users', UserController::class);
     Route::resource('subscribers', SubscriberController::class);
+    Route::resource('subscriber_import', ImportSubscriberController::class);
 
 });
 

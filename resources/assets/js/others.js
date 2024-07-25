@@ -185,7 +185,6 @@ function select2Init() {
                         const serializeDiv = $(this).parents('.select2-to-serialize');
                         if (serializeDiv) {
                             const formSerialize = serializeDiv.find(':input').serialize();
-                            console.log(formSerialize);
                             return data_url + '&select2=1&' + formSerialize;
                         } else {
                             return data_url + '&select2=1&';
@@ -216,68 +215,72 @@ function select2Init() {
             if ($(this).hasClass('tags-enable')) {
                 tags = true;
             }
+
             $(this).select2({
                 theme: 'bootstrap-5',
-                tags: tags
+                tags: tags,
+                width:'100%',
+                dropdownParent: $(this).parent()
             });
         });
 
     }
-    if ($('.datetimepicker-time').length) {
-        $('.datetimepicker-time').daterangepicker({
-                autoUpdateInput: false,
-                timePicker: true,
-                singleDatePicker: true,
-                timePicker24Hour: true,
-                timePickerIncrement: 5,
-                drops: 'up',
-                autoApply: true,
-                locale: {
-                    format: 'YYYY-MM-DD HH:mm',
-                    applyLabel: "OK",
-                    cancelLabel: "Wyczyść",
-                },
-            }
-        ).on('show.daterangepicker', function (ev, picker) {
-            $(".auto-apply").remove();
-        }).on('showCalendar.daterangepicker', function (ev, picker) {
-            $(".auto-apply").remove();
-        }).on('cancel.daterangepicker', function (ev, picker) {
-            $(picker.element[0]).val('');
-        }).on('apply.daterangepicker', function (ev, picker) {
-            $(picker.element[0]).val(picker.startDate.format('YYYY-MM-DD HH:mm'));
-        });
-    }
-
-    if ($('.daterangepicker').length) {
-        $('.daterangepicker').daterangepicker({
-            // singleDatePicker: true,
-            timePicker: false,
-            locale: {
-                "format": "YYYY-MM-DD",
-            },
-            autoUpdateInput: false,
-            autoApply: true
-        });
-    }
-
-    $('.toggle').on("click", function () {
-        const target = $(this).attr('data-toggle-target');
-        if (target) {
-            $("#" + target).toggle('fast', function () {
-                if ($(this).is(':hidden')) {
-
-                } else {
-                    const prev = $(this).prev();
-                    if (prev.hasClass('table-reload')) {
-                        prev.click();
-                    }
-                }
-            });
-        }
-    });
-
 }
+
+if ($('.datetimepicker-time').length) {
+    $('.datetimepicker-time').daterangepicker({
+            autoUpdateInput: false,
+            timePicker: true,
+            singleDatePicker: true,
+            timePicker24Hour: true,
+            timePickerIncrement: 5,
+            drops: 'up',
+            autoApply: true,
+            locale: {
+                format: 'YYYY-MM-DD HH:mm',
+                applyLabel: "OK",
+                cancelLabel: "Wyczyść",
+            },
+        }
+    ).on('show.daterangepicker', function (ev, picker) {
+        $(".auto-apply").remove();
+    }).on('showCalendar.daterangepicker', function (ev, picker) {
+        $(".auto-apply").remove();
+    }).on('cancel.daterangepicker', function (ev, picker) {
+        $(picker.element[0]).val('');
+    }).on('apply.daterangepicker', function (ev, picker) {
+        $(picker.element[0]).val(picker.startDate.format('YYYY-MM-DD HH:mm'));
+    });
+}
+
+if ($('.daterangepicker').length) {
+    $('.daterangepicker').daterangepicker({
+        // singleDatePicker: true,
+        timePicker: false,
+        locale: {
+            "format": "YYYY-MM-DD",
+        },
+        autoUpdateInput: false,
+        autoApply: true
+    });
+}
+
+$('.toggle').on("click", function () {
+    const target = $(this).attr('data-toggle-target');
+    if (target) {
+        $("#" + target).toggle('fast', function () {
+            if ($(this).is(':hidden')) {
+
+            } else {
+                const prev = $(this).prev();
+                if (prev.hasClass('table-reload')) {
+                    prev.click();
+                }
+            }
+        });
+    }
+});
+
 
 function addLoader(id) {
     $('body').prepend('<div id="' + id + '" style="position:absolute; top:50%; left:50%; z-index:99999;">' +
@@ -412,10 +415,16 @@ checkResponse = function (jResponse, src) {
                 if (target.length) {
                     target.html(jResponse.append.html);
                 }
+            }else{
+                const target = $(jResponse.append.target);
+                if (target.length) {
+                    target.html(jResponse.append.html);
+                }
             }
+
             if (ajaxAfterScripts !== '') {
                 setTimeout(function () {
-                    console.log(ajaxAfterScripts);
+
                     eval(ajaxAfterScripts + '()');
                 }, 100);
             }
@@ -424,7 +433,6 @@ checkResponse = function (jResponse, src) {
         }
 
     } catch (error) {
-        console.log(error);
         refresh = false;
     }
 
@@ -543,9 +551,6 @@ checkErrorResponse = function (form, error) {
                 strKey2 = ':input[name="' + key + '[]"]';
             }
 
-            console.log(strKey);
-            console.log(strKey2);
-
             if ($(strKey).length > 0) {
                 findEl = $(strKey);
             } else if ($(strKey2).length > 0) {
@@ -597,3 +602,50 @@ checkErrorResponse = function (form, error) {
     return error;
 }
 
+UploadObject = {
+    form: '',
+    action: '',
+    sendAjax: function (src) {
+        this.form = src.parents('form');
+        this.action = this.form.attr('action');
+        if (this.form.find('input[name="files[]"]')[0].files.length === 0) {
+            Notification.Warning(__('Proszę wybrać pliki!'));
+            return false;
+        } else {
+            UploadObject.uploadData(this.form.find('input[name="files[]"]')[0].files);
+        }
+
+    },
+
+    uploadData: function (file_obj) {
+        if (file_obj != undefined) {
+            var form_data = new FormData(this.form[0]);
+            for (i = 0; i < file_obj.length; i++) {
+                form_data.append('files[' + i + ']', file_obj[i]);
+                if (file_obj[i].name.indexOf('.exe') > -1) {
+                    Notification.Error(__('Niedopuszczalny format pliku ' + file_obj[i].name));
+                    return false;
+                }
+
+                if (file_obj[i].size > 8988608) {
+                    Notification.Error(__('Niedopuszczalny rozmiar pliku ' + file_obj[i].name));
+                    return false;
+                }
+
+            }
+
+            $.ajax({
+                url: this.action,
+                type: 'post',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                dataType: 'html',
+                complete: function (resp) {
+                    let jResponse = JSON.parse(resp.responseText);
+                    checkResponse(jResponse);
+                }
+            });
+        }
+    }
+};
