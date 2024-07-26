@@ -18,24 +18,7 @@ class SubscriberController extends BaseController
 
     public function index(Request $request)
     {
-        $search = $request->search ?? '';
-        $query = Subscriber::query()
-            ->select(
-                [
-                    'subscribers.id',
-                    'subscribers.subscriber_group_name',
-                    'subscribers.first_name',
-                    'subscribers.last_name',
-                    'subscribers.email',
-                    'subscribers.phone',
-                    'subscribers.created_at',
-                ]
-            );
-        $query->whereNull('deleted_at');
-
-        if(!empty($search)){
-            $query->whereRaw("LOWER(concat(first_name, ' ', last_name, ' ', email)) like ? ", '%' . mb_strtolower($search, 'utf-8') . '%');
-        }
+        $query = $this->repository->getSubscribersQuery();
 
         $subscribers = $query->sortable(['id' => 'desc'])
             ->paginate(500);
@@ -81,11 +64,11 @@ class SubscriberController extends BaseController
 
     public function destroy(Request $request, $id)
     {
-        $isDelete = $this->subscriberService->delete($id);
+        $isDelete = $this->subscriberService->delete($request->selected_items ?? $id);
 
         return $this->handleSaveResponse($isDelete,
-            'Pomyślnie usunięto wybranego uczestnika.',
-            'Nie udało się usunąć wybranego uczestnika.',
+            'Pomyślnie usunięto wybranych uczestników.',
+            'Nie udało się usunąć wybranych uczestników.',
             route('admin.subscribers.index')
         );
     }

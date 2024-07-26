@@ -22,7 +22,7 @@ class BaseController extends Controller
             return back()->with('success', $successMessage);
         } else {
             if (\request()->ajax()) {
-                return response()->json(['message' => $errorMessage, 'redirect' => $redirect], 500);
+                return response()->json(['error' => $errorMessage, 'redirect' => $redirect], 500);
             }
             if ($redirect != '') {
                 return redirect($redirect)->with('error', $errorMessage);

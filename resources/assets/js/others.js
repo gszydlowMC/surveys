@@ -4,6 +4,19 @@ function __(text) {
     return text;
 }
 
+TableFunctions = {
+
+    getSelectedIds: function (inputName) {
+        let values = [];
+        if ($('input[name="' + inputName + '[]"]').length) {
+            $('input[name="' + inputName + '[]"]:checked').each(function(){
+               values.push($(this).val());
+            });
+        }
+        return values;
+    }
+};
+
 $(document).ready(function (e) {
     $(document).ajaxStart(function () {
         addLoader('ajaxLoader123123');
@@ -219,7 +232,7 @@ function select2Init() {
             $(this).select2({
                 theme: 'bootstrap-5',
                 tags: tags,
-                width:'100%',
+                width: '100%',
                 dropdownParent: $(this).parent()
             });
         });
@@ -415,7 +428,7 @@ checkResponse = function (jResponse, src) {
                 if (target.length) {
                     target.html(jResponse.append.html);
                 }
-            }else{
+            } else {
                 const target = $(jResponse.append.target);
                 if (target.length) {
                     target.html(jResponse.append.html);
@@ -428,8 +441,13 @@ checkResponse = function (jResponse, src) {
                     eval(ajaxAfterScripts + '()');
                 }, 100);
             }
-        } else {
-            // Notification.Error(jResponse.errors);
+        } else if(jResponse.error){
+            Notification.Error(jResponse.error);
+            if (jResponse.redirect && jResponse.redirect !== '') {
+                setTimeout(function () {
+                    window.location.href = jResponse.redirect;
+                }, 1000);
+            }
         }
 
     } catch (error) {
@@ -649,3 +667,4 @@ UploadObject = {
         }
     }
 };
+

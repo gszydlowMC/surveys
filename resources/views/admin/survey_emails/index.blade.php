@@ -1,6 +1,6 @@
 @extends('_partials.layouts.admin')
 @section('header-title')
-    {{__('Ankiety')}}
+    {{__('Komunikacja')}}
 @endsection
 @section('header-button')
     <a class="btn btn-primary mt-2">{{__('Utwórz ankietę')}}</a>
@@ -11,15 +11,15 @@
             <div class="d-inline-block">
                 <ul class="nav nav-pills px-0 mx-0 nav-up">
                     <li class="nav-item active">
-                        <a href="{{route('admin.surveys.index')}}" class="nav-link px-0">{{__('Ankiety')}}</a>
+                        <a href="{{route('admin.survey_emails.index')}}" class="nav-link px-0">{{__('Wysłane maile')}}</a>
                     </li>
                     <li class="nav-item ms-4">
-                        <a href="{{route('admin.surveys.index')}}" class="nav-link px-0">{{__('Ankiety - Wyniki')}}</a>
+                        <a href="{{route('admin.survey_sms.index')}}" class="nav-link px-0">{{__('Wysłane sms')}}</a>
                     </li>
                 </ul>
             </div>
             <div class="float-end">
-                <a class="btn btn-secondary" href="{{route('admin.surveys.create')}}" >{{__('Dodaj')}}</a>
+                <a class="btn btn-secondary" href="#" data-bs-toggle="modal" data-bs-target="#mainModalAdmin" data-url="{{route('admin.subscribers.create')}}">{{__('Wyślij ponownie')}}</a>
             </div>
         </div>
     </div>
@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col-12">
                     <div>
-                        @include('admin.surveys.table')
+                        @include('admin.survey_emails.table')
                     </div>
                 </div>
             </div>

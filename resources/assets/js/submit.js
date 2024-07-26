@@ -220,6 +220,9 @@ SubmitForm = {
                             }
                         }
                     });
+                }else if(error.responseJSON.error){
+                    Notification.Error(error.responseJSON.error);
+                    // form.reset();
                 }
 
                 this.enableSubmitButton(button);

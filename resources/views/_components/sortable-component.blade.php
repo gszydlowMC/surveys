@@ -1,7 +1,7 @@
 <div class="table-responsive text-nowrap sortable-compontent position-relative"
          style="height:{{$config['height'] ?? '500px'}};"
 >
-    <table class="table table-bordered data-table" data-url="">
+    <table class="table table-bordered data-table" data-url="" id="{{$config['id'] ?? uniqid('table_')}}">
         <thead class="position-sticky bg-white z-3" style="top:0;">
         <tr>
             @if(isset($config['checkbox']))

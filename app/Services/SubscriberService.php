@@ -65,15 +65,22 @@ class SubscriberService extends BaseService
         }
     }
 
-    public function delete($id)
+    public function delete(int|array $id)
     {
+        if(!is_array($id)) {
+            $ids = [$id];
+        }else{
+            $ids = $id;
+        }
         try {
-            $subscriber = Subscriber::query()->findOrFail($id);
-            $subscriber->fill([
-                'deleted_at' => now()->format('Y-m-d H:i:s'),
-                'deleted_by' => Auth::user()->id
-            ]);
-            $subscriber->save();
+            foreach ($ids as $id) {
+                $subscriber = Subscriber::query()->findOrFail($id);
+                $subscriber->fill([
+                    'deleted_at' => now()->format('Y-m-d H:i:s'),
+                    'deleted_by' => Auth::user()->id
+                ]);
+                $subscriber->save();
+            }
             return true;
         } catch (\Throwable $e) {
             $this->error = $e->getMessage();

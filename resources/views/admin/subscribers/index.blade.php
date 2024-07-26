@@ -27,7 +27,7 @@
         <div class="col-8 mx-auto white-box">
             <div class="row">
                 <div class="col-12">
-                    <div id="subscribersTable">
+                    <div>
                         @include('admin.subscribers.table')
                     </div>
                 </div>

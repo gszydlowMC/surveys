@@ -104,6 +104,6 @@ class AuthController extends BaseController
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('auth.login');
     }
 }
