@@ -5,24 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
 
-class SurveyToken extends Model
+class SurveySection extends Model
 {
     use Sortable;
 
-    public $timestamps = false;
-
-    protected $table = 'survey_tokens';
+    protected $table = 'survey_sections';
 
     protected $fillable = [
         'survey_id',
-        'subscriber_id',
-        'token',
-        'created_by',
-        'created_at',
+        'before_question_id',
+        'title',
+        'description',
     ];
 
     protected $sortable = [
-        'token',
     ];
+
 }
 

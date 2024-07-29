@@ -47,10 +47,13 @@
                                 <a href="{{ route('profile.index') }}" class="p-2 dropdown-item">
                                     Edytuj konto
                                 </a>
-                                <a href="{{ route('logout') }}" class="p-2 dropdown-item">
+                                <a href="{{ route('admin.surveys.index') }}" class="p-2 dropdown-item">
+                                    Ankiety
+                                </a>
+                                <a href="{{ route('admin.users.index') }}" class="p-2 dropdown-item">
                                     Zarządzanie
                                 </a>
-                                <a href="{{ route('logout') }}" class="p-2 dropdown-item">
+                                <a href="{{ route('admin.survey_emails.index') }}" class="p-2 dropdown-item">
                                     Komunikacja
                                 </a>
                                 <a href="{{ route('logout') }}" class="p-2 dropdown-item">

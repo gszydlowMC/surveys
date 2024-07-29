@@ -34,7 +34,7 @@ h2 {
 
 .btn-primary {
     background: $bg-button1;
-    color: $color-button1;
+    color: $color-button1 !important;
     border: none;
     font-size: $font-size-base;
     line-height: $line-height-to-base;
@@ -54,7 +54,12 @@ h2 {
 
 .btn-secondary:hover {
     background: $color-active;
-    color: #fff;
+    color: #fff !important;
+}
+
+.btn-primary:hover {
+    background: $color-active;
+    color: #fff !important;
 }
 
 .box-left {
@@ -121,7 +126,7 @@ table {
 
 }
 
-.nav-up {
+.toolbox-left ul, .nav-up {
     li {
         a {
             color: $color-base;
@@ -133,8 +138,16 @@ table {
     li.active {
         border-bottom: 4px solid #495FAC;
     }
+    li{
+        list-style-type: none;
+    }
 }
 
+.toolbox-left ul,
+.toolbox-left ul li{
+    padding:0;
+    margin:0;
+}
 label {
     font-size: 16px;
     line-height: 26px;

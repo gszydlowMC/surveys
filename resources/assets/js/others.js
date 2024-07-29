@@ -180,7 +180,12 @@ formatBytes = function (bytes, decimals = 2) {
     return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
 }
 
-function select2Init() {
+test = {
+    a : function(){
+        alert('asd');
+    }
+}
+select2Init =  function() {
     if ($('.select2-ajax').length) {
         $('.select2-ajax').each(function () {
             const data_url = $(this).attr('data-url');
@@ -224,6 +229,7 @@ function select2Init() {
 
     if ($('.select2-simple').length) {
         $('.select2-simple').each(function () {
+
             let tags = false;
             if ($(this).hasClass('tags-enable')) {
                 tags = true;

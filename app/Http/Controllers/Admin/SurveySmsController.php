@@ -20,14 +20,14 @@ class SurveySmsController extends BaseController
 
     public function index(Request $request)
     {
-        $query = $this->repository->getEmailsQuery();
+        $query = $this->repository->getSmsQuery();
 
-        $emails = $query->sortable(['id' => 'desc'])
+        $sms = $query->sortable(['id' => 'desc'])
             ->paginate(500);
 
         $enableSearch = true;
 
-        return view('admin.survey_emails.index', compact('emails', 'enableSearch'));
+        return view('admin.survey_sms.index', compact('sms', 'enableSearch'));
     }
 
     public function destroy(Request $request, $id)

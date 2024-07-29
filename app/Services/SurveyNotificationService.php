@@ -29,6 +29,7 @@ class SurveyNotificationService extends BaseService
                 }
             }
             DB::commit();
+            return true;
         } catch (\Throwable $e) {
             DB::rollBack();
             dd($e);
@@ -49,7 +50,7 @@ class SurveyNotificationService extends BaseService
             }
 
             DB::commit();
-
+            return true;
         } catch (\Throwable $e) {
             DB::rollBack();
             $this->error = $e->getMessage();
@@ -92,7 +93,7 @@ class SurveyNotificationService extends BaseService
 
     public function saveSurveyToken($surveyId, $subscriberId)
     {
-        return SurveyToken::query()->createOrFirst([
+        $token = SurveyToken::query()->newQuery()->newModelInstance([
             'survey_id' => $surveyId,
             'subscriber_id' => $subscriberId,
             'token' => Str::random(60) . microtime(),
@@ -100,6 +101,8 @@ class SurveyNotificationService extends BaseService
             'created_at' => now()->format('Y-m-d H:i:s'),
 
         ]);
+        $token->save();
+        return $token;
     }
 
 }

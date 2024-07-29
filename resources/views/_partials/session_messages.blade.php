@@ -1,10 +1,12 @@
 @section('session-scripts')
-    <script>
-        @if (\Session::has('success'))
+    @if (\Session::has('success'))
+        <script>
             Notification.Success('{!! \Session::get('success') !!}');
-        @endif
-        @if (\Session::has('error'))
+        </script>
+    @endif
+    @if (\Session::has('error'))
+        <script>
             Notification.Error('{!! \Session::get('error') !!}');
-        @endif
-    </script>
+        </script>
+    @endif
 @endsection

@@ -24,14 +24,14 @@
                 ['alias' => 'subscriber_group_name', 'text' => 'Grupa', 'sort' => true],
                 ['alias' => 'first_name', 'text' => 'Imię', 'sort' => true],
                 ['alias' => 'last_name', 'text' => 'Nazwisko', 'sort' => true],
-                ['alias' => 'to', 'text' => 'Email', 'sort' => true],
+                ['alias' => 'to', 'text' => 'Numer telefonu', 'sort' => true],
                 ['alias' => 'sent_at', 'text' => 'Data wysłania', 'sort' => true],
                 ['alias' => 'created_at', 'text' => 'Data nadania', 'sort' => true],
                 [
                     'alias' => 'actions', 'text' => 'Szczegóły', 'sort' => false, 'view' => 'admin.survey_emails.table-row-actions'
                 ],
             ],
-            'data' => $emails
+            'data' => $sms
         ]
     ])
 </div>

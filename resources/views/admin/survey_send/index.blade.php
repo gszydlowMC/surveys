@@ -3,7 +3,7 @@
     {{__('Ankiety')}}
 @endsection
 @section('header-button')
-    <a class="btn btn-primary mt-2">{{__('Utwórz ankietę')}}</a>
+    <a class="btn btn-primary mt-2" href="{{route('admin.surveys.create')}}">{{__('Utwórz ankietę')}}</a>
 @endsection
 @section('content')
     <div class="row bg-white py-3">

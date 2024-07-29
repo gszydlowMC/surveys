@@ -19,6 +19,14 @@
             <div class="row">
                 <div class="col-12">
                     <div class="form-group mt-3">
+                        @include('_components.fields.select', ['config' => [
+                            'label' => __('Grupa'),
+                            'name' => 'user_group_id',
+                            'value' => $form->user_group_id ?? '',
+                            'options' => $userGroups ?? []
+                        ]])
+                    </div>
+                    <div class="form-group mt-3">
                         @include('_components.fields.input-text', ['config' => [
                             'label' => __('Imię'),
                             'name' => 'first_name',
@@ -40,14 +48,6 @@
                             'name' => 'email',
                             'value' => $form->email ?? '',
                             'placeholder' => __('Wpisz adres e-mail')
-                        ]])
-                    </div>
-                    <div class="form-group mt-3">
-                        @include('_components.fields.select', ['config' => [
-                            'label' => __('Grupa'),
-                            'name' => 'user_group_id',
-                            'value' => $form->user_group_id ?? '',
-                            'options' => $userGroups ?? []
                         ]])
                     </div>
                 </div>
