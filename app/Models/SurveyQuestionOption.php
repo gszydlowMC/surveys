@@ -9,6 +9,8 @@ class SurveyQuestionOption extends Model
 {
     use Sortable;
 
+    public $timestamps = false;
+
     protected $table = 'survey_question_options';
 
     protected $fillable = [

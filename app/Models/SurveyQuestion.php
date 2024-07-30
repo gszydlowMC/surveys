@@ -9,11 +9,13 @@ class SurveyQuestion extends Model
 {
     use Sortable;
 
+    public $timestamps = false;
+
     protected $table = 'survey_questions';
 
     protected $fillable = [
         'survey_id',
-        'filed_type',
+        'field_type',
         'label',
         'is_required',
         'is_last_on_site',
@@ -27,5 +29,9 @@ class SurveyQuestion extends Model
     protected $sortable = [
     ];
 
+    public function options()
+    {
+        return $this->hasMany(SurveyQuestionOption::class, 'survey_question_id', 'id');
+    }
 }
 

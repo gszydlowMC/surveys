@@ -49,26 +49,26 @@ class SurveyController extends BaseController
         );
     }
 
-    public function update(AdminSurveyRequest $request, $id)
-    {
-        $status = $this->subscriberService->save($request->all(), $id);
-        return $this->handleSaveResponse($status,
-            'Pomyślnie edytowano ankietę.',
-            'Nie udało się edytować ankiety.',
-            route('admin.surveys.index')
-
-        );
-    }
-
-    public function destroy(Request $request, $id)
-    {
-        $isDelete = $this->service->delete($request->selected_items ?? $id);
-
-        return $this->handleSaveResponse($isDelete,
-            'Pomyślnie usunięto wybrane ankiety.',
-            'Nie udało się usunąć wybranych ankiet.',
-            route('admin.surveys.index')
-        );
-    }
+//    public function update(AdminSurveyRequest $request, $id)
+//    {
+//        $status = $this->service->save($request->all(), $id);
+//        return $this->handleSaveResponse($status,
+//            'Pomyślnie edytowano ankietę.',
+//            'Nie udało się edytować ankiety.',
+//            route('admin.surveys.index')
+//
+//        );
+//    }
+//
+//    public function destroy(Request $request, $id)
+//    {
+//        $isDelete = $this->service->delete($request->selected_items ?? $id);
+//
+//        return $this->handleSaveResponse($isDelete,
+//            'Pomyślnie usunięto wybrane ankiety.',
+//            'Nie udało się usunąć wybranych ankiet.',
+//            route('admin.surveys.index')
+//        );
+//    }
 
 }

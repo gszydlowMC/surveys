@@ -1,4 +1,4 @@
-<div class="col-9 mx-auto mt-3 section-box duplicate-container">
+<div class="col-9 mx-auto mt-3 section-box duplicate-container sortable-box">
     <a class="btn btn-primary position-relative z-0 title-value" style="top:7px;">
         {{__('Sekcja 1')}}
     </a>
@@ -6,6 +6,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="form-group my-2">
+                    <input type="hidden" name="section[before_question_index][]" value="" />
                     @include('_components.fields.input-text', ['config' => [
                         'label' => __('Dodaj opis (opcjonalnie)'),
                         'name' => 'section[name][]',

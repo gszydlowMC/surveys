@@ -9,6 +9,8 @@ class SurveySection extends Model
 {
     use Sortable;
 
+    public $timestamps = false;
+
     protected $table = 'survey_sections';
 
     protected $fillable = [

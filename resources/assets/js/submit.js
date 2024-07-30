@@ -7,7 +7,7 @@ SubmitForm = {
             let button = form.querySelector('[type="submit"].focus');
             if (e.originalEvent && e.originalEvent.submitter) {
                 button = e.originalEvent.submitter;
-                this.disableSubmitButton(button);
+                // this.disableSubmitButton(button);
             }
 
             if (button && button.dataset.timeout && button.dataset.timeout > 0) {

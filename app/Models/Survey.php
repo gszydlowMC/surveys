@@ -18,6 +18,11 @@ class Survey extends Model
         'created_at',
     ];
 
+    public function questions()
+    {
+        return $this->hasMany(SurveyQuestion::class, 'survey_id', 'id');
+    }
+
 
 }
 

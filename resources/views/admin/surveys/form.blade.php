@@ -39,12 +39,13 @@
                 </div>
             </div>
             <div class="row mt-2 position-relative mb-3">
+                {{--                <div class="empty-area mb-3">--}}
                 <div class="empty-area d-none">
                     @include('admin.surveys.form_partials.create_section')
                     @include('admin.surveys.form_partials.create_question')
                 </div>
-                <form method="POST" action="{{ route('admin.surveys.store') }}" autocomplete="off"
-                      class="form-ajax-send">
+                <form method="POST" id="SurveyForm" action="{{ route('admin.surveys.store') }}" autocomplete="off"
+                      class="form-ajax-send" onsubmit="SurveyCreator.beforeSubmit()">
                     @csrf
                     <div class="col-9 mx-auto white-box">
                         <div class="row">
@@ -71,7 +72,7 @@
                             <div class="col-12">
                                 <h2 class="my-4">Nagłówek ankiety</h2>
                                 <div class="form-group my-2">
-                                    @include('_components.fields.input-text', ['config' => [
+                                    @include('_components.fields.textarea', ['config' => [
                                         'label' => __('Opis ankiety'),
                                         'name' => 'description',
                                         'value' => $form->description ?? '',
@@ -109,6 +110,30 @@
 @endsection
 @section('other-scripts')
     <script>
+
+        $(document).ready(function () {
+            $('.question_type_selector').each(function () {
+                $(this).trigger('change');
+            });
+            $(document).on('change', '.question_type_selector', function () {
+                const question = $(this).closest('.question-box');
+                const value = $(this).val();
+                $(this).find('option[value="' + value + '"]').attr('selected', 'selected');
+                question.find('.option-visible-element').addClass('d-none');
+                question.find('.option-visible-element.visible-' + value).removeClass('d-none');
+                if ($(this).attr('type') !== 'list') {
+                    question.find('.options-area .option-box').each(function (index) {
+                        if (index > 0) {
+                            $(this).remove();
+                        }
+                    });
+                }
+            });
+
+            $('.sortable-area').sortable({
+                items: '.sortable-box'
+            });
+        });
         SurveyCreator = {
             addQuestion: function (src) {
                 const container = $(src).closest('.survey-area');
@@ -116,7 +141,7 @@
                 const question = container.find('.empty-area .question-box');
                 const copy = question.clone();
                 questionsArea.append(copy);
-                select2Init();
+                // select2Init();
             },
             addSection: function (src) {
                 const container = $(src).closest('.survey-area');
@@ -131,10 +156,10 @@
                 const copy = el.clone();
                 copy.find('.title-value').html(title + '-DUPLIKAT');
                 el.after(copy);
-                select2Init();
+                // select2Init();
             },
             setTabNav: function (src) {
-                const container = $(src).closest('.section-box');
+                const container = $(src).closest('.sortable-box');
                 const title = container.find('.title-value');
                 title.html($(src).val());
             },
@@ -142,11 +167,30 @@
                 const el = $(src).closest('.duplicate-container');
                 el.remove();
             },
-            // changeId: function(src){
-            //     $(src).find(':input').each(function(){
-            //         $(this).attr('id', $(this).attr('id')+'')
-            //     })
-            // }
+            addOption: function (src) {
+                const container = $(src).closest('.options-area');
+                const option = $(src).closest('.option-box');
+                const copy = option.clone();
+                container.append(copy);
+            },
+            delOption: function (src) {
+                const container = $(src).closest('.options-area');
+                if (container.find('.option-box').length > 1) {
+                    $(src).closest('.option-box').remove();
+                }
+            },
+            beforeSubmit: function () {
+                $('.questions-area :input[name="question[name][]"]').each(function (index) {
+                    const prevSection = $(this).closest('.question-box').prevAll('.section-box:first');
+                    if(prevSection){
+                        prevSection.find(':input[name="section[before_question_index][]"]').val(index);
+                    }
+                    $(this).closest('.question-box').find('input[name="option[question_][]"]').each(function () {
+                        const name = $(this).attr('name');
+                        $(this).attr('name', name.replace('question_', 'question_' + index));
+                    });
+                });
+            },
 
         };
 
