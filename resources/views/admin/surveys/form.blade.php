@@ -32,9 +32,10 @@
                         </ul>
                     </div>
                     <div class="float-end">
-                        {{--                        @if($survey->id ?? null)--}}
-                        <a class="btn btn-secondary" href="#" target="__blank">Podgląd</a>
-                        {{--                        @endif--}}
+                        @if($survey->id ?? null)
+                            <a class="btn btn-secondary" href="{{route('admin.surveys.show', [$survey])}}"
+                               target="__blank">Podgląd</a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -44,15 +45,27 @@
                     @include('admin.surveys.form_partials.create_section')
                     @include('admin.surveys.form_partials.create_question')
                 </div>
-                <form method="POST" id="SurveyForm" action="{{ route('admin.surveys.store') }}" autocomplete="off"
-                      class="form-ajax-send" onsubmit="SurveyCreator.beforeSubmit()">
+                @php($action = ($survey ?? false) ? route('admin.surveys.update', [$survey]) : route('admin.surveys.store'))
+                <form method="POST" id="SurveyForm" action="{{ $action }}" autocomplete="off" class="form-ajax-send"
+                      onsubmit="SurveyCreator.beforeSubmit()" enctype="multipart/form-data">
+                    @if(($survey ?? false) )
+                        @method('put')
+                    @endif
                     @csrf
                     <div class="col-9 mx-auto white-box">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-3">
+                                <div class="logo-preview">
+                                    <img id="logoPreview"
+                                         src="{{(!empty($survey->logo_path ?? '')) ? asset('storage/'.$survey->logo_path) : ''}}"
+                                         alt="your image"/>
+                                </div>
+                            </div>
+                            <div class="col-3">
                                 <div class="form-group mt-3">
                                     <label>Dodaj logo</label>
-                                    <input type="file" class="form-control" name="logo_file"/>
+                                    <input type="file" class="form-control" id="logoInp" name="logo_file"
+                                           accept="image/*"/>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -60,7 +73,7 @@
                                     @include('_components.fields.input-text', ['config' => [
                                         'label' => __('Nazwa'),
                                         'name' => 'name',
-                                        'value' => $form->name ?? '',
+                                        'value' => $survey->name ?? '',
                                         'placeholder' => __('Tytuł ankiety')
                                     ]])
                                 </div>
@@ -70,12 +83,29 @@
                     <div class="col-9 mx-auto white-box mt-3">
                         <div class="row">
                             <div class="col-12">
+                                <div class="w-100">
+                                    <img id="bannerPreview" src="{{(!empty($survey->banner_path ?? '')) ? asset('storage/'.$survey->banner_path) : ''}}" alt="Banner"/>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <input type="file" class="form-control" id="bannerInp" name="banner_file"
+                                           accept="image/*"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-9 mx-auto white-box mt-3">
+                        <div class="row">
+                            <div class="col-12">
                                 <h2 class="my-4">Nagłówek ankiety</h2>
                                 <div class="form-group my-2">
                                     @include('_components.fields.textarea', ['config' => [
                                         'label' => __('Opis ankiety'),
                                         'name' => 'description',
-                                        'value' => $form->description ?? '',
+                                        'classes' => 'tinymce-init',
+                                        'value' => $survey->description ?? '',
                                         'placeholder' => __('Opis ankiety')
                                     ]])
                                 </div>
@@ -86,6 +116,17 @@
                     <div class="sortable-area questions-area">
                         {{--                        @include('admin.surveys.form_partials.create_section')--}}
                         {{--                        @include('admin.surveys.form_partials.create_question')--}}
+                        @if(isset($survey->id))
+                            @foreach($survey->questions()->orderBy('position')->get() as $question)
+                                @foreach($question->sectionsBefore()->orderBy('id')->get() as $section)
+                                    @include('admin.surveys.form_partials.create_section', ['section' => $section])
+                                @endforeach
+                                @include('admin.surveys.form_partials.create_question', ['question' => $question])
+                            @endforeach
+                            @foreach($survey->sections()->orderBy('id')->get() as $section)
+                                @include('admin.surveys.form_partials.create_section', ['section' => $section])
+                            @endforeach
+                        @endif
                     </div>
                     <div class="col-9 mx-auto white-box mt-3 position-sticky bottom-0 z-2">
                         <div class="row">
@@ -121,7 +162,7 @@
                 $(this).find('option[value="' + value + '"]').attr('selected', 'selected');
                 question.find('.option-visible-element').addClass('d-none');
                 question.find('.option-visible-element.visible-' + value).removeClass('d-none');
-                if ($(this).attr('type') !== 'list') {
+                if ($(this).find('option:selected').attr('type') !== 'list') {
                     question.find('.options-area .option-box').each(function (index) {
                         if (index > 0) {
                             $(this).remove();
@@ -131,9 +172,34 @@
             });
 
             $('.sortable-area').sortable({
-                items: '.sortable-box'
+                items: '.sortable-box',
+                handle: '.title-value',
             });
+
+            sortableOptionsInit();
+
+            logoInp.onchange = evt => {
+                const [file] = logoInp.files
+                if (file) {
+                    logoPreview.src = URL.createObjectURL(file)
+                }
+            }
+
+            bannerInp.onchange = evt => {
+                const [file] = bannerInp.files
+                if (file) {
+                    bannerPreview.src = URL.createObjectURL(file)
+                }
+            }
         });
+
+        function sortableOptionsInit() {
+            $('.options-area').sortable({
+                items: '.option-box',
+                handle: '.sortable-handle',
+            });
+        }
+
         SurveyCreator = {
             addQuestion: function (src) {
                 const container = $(src).closest('.survey-area');
@@ -172,6 +238,7 @@
                 const option = $(src).closest('.option-box');
                 const copy = option.clone();
                 container.append(copy);
+                sortableOptionsInit();
             },
             delOption: function (src) {
                 const container = $(src).closest('.options-area');
@@ -182,7 +249,7 @@
             beforeSubmit: function () {
                 $('.questions-area :input[name="question[name][]"]').each(function (index) {
                     const prevSection = $(this).closest('.question-box').prevAll('.section-box:first');
-                    if(prevSection){
+                    if (prevSection) {
                         prevSection.find(':input[name="section[before_question_index][]"]').val(index);
                     }
                     $(this).closest('.question-box').find('input[name="option[question_][]"]').each(function () {

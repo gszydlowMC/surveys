@@ -9,8 +9,8 @@ TableFunctions = {
     getSelectedIds: function (inputName) {
         let values = [];
         if ($('input[name="' + inputName + '[]"]').length) {
-            $('input[name="' + inputName + '[]"]:checked').each(function(){
-               values.push($(this).val());
+            $('input[name="' + inputName + '[]"]:checked').each(function () {
+                values.push($(this).val());
             });
         }
         return values;
@@ -166,6 +166,10 @@ $(document).ready(function (e) {
     $(document).on('hide.bs.modal', '#mainModalAdmin', function (e) {
         $(e.currentTarget).find('.modal-content').html('');
     });
+
+    if ($('.tinymce-init').length) {
+        tinymceInit();
+    }
 });
 
 formatBytes = function (bytes, decimals = 2) {
@@ -181,11 +185,11 @@ formatBytes = function (bytes, decimals = 2) {
 }
 
 test = {
-    a : function(){
+    a: function () {
         alert('asd');
     }
 }
-select2Init =  function() {
+select2Init = function () {
     if ($('.select2-ajax').length) {
         $('.select2-ajax').each(function () {
             const data_url = $(this).attr('data-url');
@@ -447,7 +451,7 @@ checkResponse = function (jResponse, src) {
                     eval(ajaxAfterScripts + '()');
                 }, 100);
             }
-        } else if(jResponse.error){
+        } else if (jResponse.error) {
             Notification.Error(jResponse.error);
             if (jResponse.redirect && jResponse.redirect !== '') {
                 setTimeout(function () {
@@ -674,3 +678,27 @@ UploadObject = {
     }
 };
 
+function tinymceInit() {
+    // tinymce.remove();
+    // tinymce.init({
+    //     selector: '.tinymce-init',
+    //     // resize: 'both',
+    //     // theme_advanced_resizing: true,
+    //     // setup: function (editor) {
+    //     //     editor.on('input, focusout', event => {
+    //     //         console.log('tinymce save');
+    //     //         tinymce.triggerSave();
+    //     //     });
+    //     //     const target = document.getElementById(editor.id);
+    //     //     const height = target.dataset.tinymceHeight;
+    //     //     if (height) {
+    //     //         editor.settings.height = parseInt(height);
+    //     //     }
+    //     // },
+    //     //
+    //     // plugins: 'a_tinymce_plugin',
+    //     // a_plugin_option: true,
+    //     // a_configuration_option: 400
+    //
+    // });
+}

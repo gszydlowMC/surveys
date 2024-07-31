@@ -1,16 +1,16 @@
 <div class="col-9 mx-auto mt-3 section-box duplicate-container sortable-box">
     <a class="btn btn-primary position-relative z-0 title-value" style="top:7px;">
-        {{__('Sekcja 1')}}
+        {{__($section->title ?? 'Sekcja 1')}}
     </a>
     <div class="w-100 white-box position-relative z-1" style="border-top-left-radius: 0;">
         <div class="row">
             <div class="col-12">
                 <div class="form-group my-2">
-                    <input type="hidden" name="section[before_question_index][]" value="" />
+                    <input type="hidden" name="section[before_question_index][]" value=""/>
                     @include('_components.fields.input-text', ['config' => [
                         'label' => __('Dodaj opis (opcjonalnie)'),
                         'name' => 'section[name][]',
-                        'value' => $form->section_name ?? '',
+                        'value' => $section->title ?? '',
                         'placeholder' => __('Nagłówek'),
                         'onkeyup' => 'SurveyCreator.setTabNav(this)'
                     ]])
@@ -19,7 +19,7 @@
                 <div class="form-group my-2">
                     @include('_components.fields.textarea', ['config' => [
                         'name' => 'section[description][]',
-                        'value' => $form->short_description ?? '',
+                        'value' => $section->description ?? '',
                         'placeholder' => __('Podaj krótki opis')
                     ]])
                 </div>

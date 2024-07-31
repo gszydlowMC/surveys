@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\SurveySmsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ProfileController;
+use App\Http\Controllers\Web\WebSurveyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -54,4 +55,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('/profile', ProfileController::class)->only(['index', 'store']);
     Route::get('logout', [AuthController::class, 'logout'])
         ->name('logout');
+    //widok ankiety klient
+    Route::get('ankieta/{token}', [WebSurveyController::class, 'show'])->name('survey');
 });

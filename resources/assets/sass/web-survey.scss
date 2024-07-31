@@ -1,0 +1,60 @@
+@import "../../../node_modules/bootstrap";
+@import "../../../node_modules/select2/src/scss/core";
+@import "../../../node_modules/select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.css";
+@import "../../../node_modules/daterangepicker/daterangepicker.css";
+@import "../../../node_modules/boxicons";
+//@import "../../../node_modules/jquery-ui/dist/themes/smoothness/jquery-ui.min.css";
+
+@import "fonts";
+
+$font-family-base: 'Nunito', sans-serif;
+$font-size-base: 16px;
+$line-height-to-base: 18.44px;
+$color-base: #232323;
+$bg-active: #D1291A;
+
+
+html {
+    font-size: $font-size-base;
+}
+
+body {
+    font-family: $font-family-base;
+    box-sizing: border-box;
+    min-height: 100vh;
+    color: $color-base;
+    background: #F1F1F1;
+}
+
+h2{
+    padding:0;
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 600;
+    color: $color-base;
+}
+
+h3{
+    padding:0;
+    font-size: 16px;
+    line-height: 18.44px;
+    font-weight: 600;
+    color: $color-base;
+}
+
+
+.box-radius
+{
+    border-radius:10px;
+}
+.btn{
+    padding: 10px 50px 10px 50px;
+    border-radius:10px;
+    font-size:16px;
+    line-height:30px;
+}
+.btn-primary{
+    background: $bg-active;
+    border-color: $bg-active;
+    color:#fff;
+}

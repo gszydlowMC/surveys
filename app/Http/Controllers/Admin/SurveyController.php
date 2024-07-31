@@ -33,9 +33,15 @@ class SurveyController extends BaseController
         return view('admin.surveys.form');
     }
 
+    public function show($id)
+    {
+        $survey = Survey::with(['sections', 'questions.options', 'questions.sectionsBefore'])->findOrFail($id);
+        return view('web.survey.index', compact('survey'));
+    }
+
     public function edit($id)
     {
-        $survey = Survey::findOrFail($id);
+        $survey = Survey::with(['sections', 'questions.options', 'questions.sectionsBefore'])->findOrFail($id);
         return view('admin.surveys.form', compact('survey'));
     }
 
@@ -49,26 +55,26 @@ class SurveyController extends BaseController
         );
     }
 
-//    public function update(AdminSurveyRequest $request, $id)
-//    {
-//        $status = $this->service->save($request->all(), $id);
-//        return $this->handleSaveResponse($status,
-//            'Pomyślnie edytowano ankietę.',
-//            'Nie udało się edytować ankiety.',
-//            route('admin.surveys.index')
-//
-//        );
-//    }
-//
-//    public function destroy(Request $request, $id)
-//    {
-//        $isDelete = $this->service->delete($request->selected_items ?? $id);
-//
-//        return $this->handleSaveResponse($isDelete,
-//            'Pomyślnie usunięto wybrane ankiety.',
-//            'Nie udało się usunąć wybranych ankiet.',
-//            route('admin.surveys.index')
-//        );
-//    }
+    public function update(AdminSurveyRequest $request, $id)
+    {
+        $status = $this->service->save($request->all(), $id);
+        return $this->handleSaveResponse($status,
+            'Pomyślnie edytowano ankietę.',
+            'Nie udało się edytować ankiety.',
+            route('admin.surveys.index')
+
+        );
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $isDelete = $this->service->delete($request->selected_items ?? $id);
+
+        return $this->handleSaveResponse($isDelete,
+            'Pomyślnie usunięto wybrane ankiety.',
+            'Nie udało się usunąć wybranych ankiet.',
+            route('admin.surveys.index')
+        );
+    }
 
 }

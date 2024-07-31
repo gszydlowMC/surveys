@@ -52,6 +52,16 @@ h2 {
     border-radius: 10px;
 }
 
+.btn-active {
+    background: $color-active;
+    color: #fff !important;
+    border: none;
+    font-size: $font-size-base;
+    line-height: $line-height-to-base;
+    padding: 10px 30px;
+    border-radius: 10px;
+}
+
 .btn-secondary:hover {
     background: $color-active;
     color: #fff !important;
@@ -60,6 +70,11 @@ h2 {
 .btn-primary:hover {
     background: $color-active;
     color: #fff !important;
+}
+
+.btn-active:hover {
+    background: $color-active !important;
+    color: $bg-button1 !important;
 }
 
 .box-left {

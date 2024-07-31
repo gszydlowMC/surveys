@@ -33,5 +33,10 @@ class SurveyQuestion extends Model
     {
         return $this->hasMany(SurveyQuestionOption::class, 'survey_question_id', 'id');
     }
+
+    public function sectionsBefore()
+    {
+        return $this->hasMany(SurveySection::class, 'before_question_id', 'id');
+    }
 }
 

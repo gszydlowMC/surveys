@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\DiskTypeEnum;
 use App\Enums\SurveyQuestionTypeEnum;
 use App\Models\Subscriber;
 use App\Models\Survey;
@@ -44,17 +45,30 @@ class SurveyService extends BaseService
             $survey->fill($data);
             $survey->save();
 
+            if (!empty($inputData['logo_file'])) {
+                $uploadedFile = $inputData['logo_file'];
+                $filename = uniqid('survey_logo_').'.' . $uploadedFile->getClientOriginalExtension();
+                $directory = '/' . $survey->id;
+                $filePath = $uploadedFile->storeAs($directory, $filename, ['disk' => DiskTypeEnum::PUBLIC]);
+                $survey->fill(['logo_path' => $filePath])->save();
+            }
+
+            if (!empty($inputData['banner_file'])) {
+                $uploadedFile = $inputData['banner_file'];
+                $filename = uniqid('banner_logo_').'.' . $uploadedFile->getClientOriginalExtension();
+                $directory = '/' . $survey->id;
+                $filePath = $uploadedFile->storeAs($directory, $filename, ['disk' => DiskTypeEnum::PUBLIC]);
+                $survey->fill(['banner_path' => $filePath])->save();
+            }
+
             if ($id > 0) {
                 if ($survey->sections->isNotEmpty()) {
-                    $survey->sections->delete();
+                    $survey->sections()->delete();
                 }
                 if ($survey->questions->isNotEmpty()) {
                     foreach ($survey->questions as $question) {
-                        if ($question->options->isNotEmpty()) {
-                            foreach ($question->options as $option) {
-                                $option->delete();
-                            }
-                        }
+                        $question->options()->delete();
+                        $question->sectionsBefore()->delete();
                         $question->delete();
                     }
                 }
@@ -76,13 +90,13 @@ class SurveyService extends BaseService
                     $questionModel->fill($questionData);
                     $questionModel->save();
 
-                    if(!in_array($inputData['question']['type'][$k], [SurveyQuestionTypeEnum::ONCE_LIST, SurveyQuestionTypeEnum::MULTI_LIST, SurveyQuestionTypeEnum::SELECT])){
+                    if (!in_array($inputData['question']['type'][$k], [SurveyQuestionTypeEnum::ONCE_LIST, SurveyQuestionTypeEnum::MULTI_LIST, SurveyQuestionTypeEnum::SELECT])) {
                         continue;
                     }
 
                     foreach ($inputData['option']['question_' . $k] as $i => $optionLabel) {
                         $optionData = [
-                            'survey_question_id' => $survey->id,
+                            'survey_question_id' => $questionModel->id,
                             'value' => $optionLabel,
                             'label' => $optionLabel,
                             'position' => $i,
@@ -105,7 +119,7 @@ class SurveyService extends BaseService
                 foreach ($inputData['section']['name'] as $k => $name) {
                     $sectionData = [
                         'survey_id' => $survey->id,
-                        'before_question_id' => $questions[$inputData['section']['before_question_index'][$k] ?? -1]?->id ?? null,
+                        'before_question_id' => $questions[($inputData['section']['before_question_index'][$k] ?? -1) - 1]?->id ?? null,
                         'title' => $name,
                         'description' => $inputData['section']['description'][$k] ?? null,
                     ];
