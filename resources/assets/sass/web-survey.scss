@@ -46,15 +46,29 @@ h3{
 .box-radius
 {
     border-radius:10px;
+    box-shadow: 0 4px 4px 0 #6F6F6F1A;
 }
 .btn{
     padding: 10px 50px 10px 50px;
     border-radius:10px;
     font-size:16px;
     line-height:30px;
+    font-weight: 600;
 }
-.btn-primary{
+.btn-primary, .btn-primary:hover{
     background: $bg-active;
     border-color: $bg-active;
     color:#fff;
+}
+.btn-secondary, .btn-secondary:hover{
+    background:#fff;
+    border-color: #fff !important;
+    color: $bg-active;
+    box-shadow: 0 4px 4px 0 #6F6F6F1A;
+
+}
+
+.btn:hover{
+    padding: 12px 55px 12px 55px !important;
+    font-weight: 800;
 }

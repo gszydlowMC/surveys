@@ -679,26 +679,29 @@ UploadObject = {
 };
 
 function tinymceInit() {
-    // tinymce.remove();
-    // tinymce.init({
-    //     selector: '.tinymce-init',
-    //     // resize: 'both',
-    //     // theme_advanced_resizing: true,
-    //     // setup: function (editor) {
-    //     //     editor.on('input, focusout', event => {
-    //     //         console.log('tinymce save');
-    //     //         tinymce.triggerSave();
-    //     //     });
-    //     //     const target = document.getElementById(editor.id);
-    //     //     const height = target.dataset.tinymceHeight;
-    //     //     if (height) {
-    //     //         editor.settings.height = parseInt(height);
-    //     //     }
-    //     // },
-    //     //
-    //     // plugins: 'a_tinymce_plugin',
-    //     // a_plugin_option: true,
-    //     // a_configuration_option: 400
-    //
-    // });
+    tinymce.remove();
+    tinymce.init({
+        selector: '.tinymce-init',
+        resize: 'both',
+        theme_advanced_resizing: true,
+        setup: function (editor) {
+            editor.on('input, focusout', event => {
+                console.log('tinymce save');
+                tinymce.triggerSave();
+            });
+            const target = document.getElementById(editor.id);
+            const height = target.dataset.tinymceHeight;
+            if (height) {
+                editor.settings.height = parseInt(height);
+            }
+        },
+        menubar: false,
+        plugins:
+            'advlist autolink lists link image charmap preview anchor' +
+            ' searchreplace visualblocks code fullscreen' +
+            ' insertdatetime media table code help wordcount autoresize'
+        ,
+        toolbar: 'undo redo | blocks | fontsizeselect | forecolor fontselect bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | fullscreen',
+        fontsize_formats: '8pt 9pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt',
+    });
 }

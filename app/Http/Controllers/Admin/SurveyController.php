@@ -5,13 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Admin\AdminSurveyRequest;
 use App\Models\Survey;
+use App\Models\SurveyToken;
 use App\Repositories\SurveyRepository;
+use App\Services\SurveyNotificationService;
 use App\Services\SurveyService;
+use Auth;
 use Illuminate\Http\Request;
+use Str;
 
 class SurveyController extends BaseController
 {
-    public function __construct(protected SurveyRepository $repository, protected SurveyService $service)
+    public function __construct(protected SurveyRepository $repository, protected SurveyService $service, protected SurveyNotificationService $notificationService)
     {
 
     }
@@ -35,8 +39,19 @@ class SurveyController extends BaseController
 
     public function show($id)
     {
-        $survey = Survey::with(['sections', 'questions.options', 'questions.sectionsBefore'])->findOrFail($id);
-        return view('web.survey.index', compact('survey'));
+        $tokenModel = SurveyToken::query()->newQuery()->firstOrCreate([
+            'survey_id' => $id,
+            'user_id' => Auth::user()->id,
+        ],
+        [
+            'subscriber_id' => null,
+            'token' => Str::random(30).date('ymdhis'),
+            'created_by' => Auth::user()->id,
+            'created_at' => now()->format('Y-m-d H:i:s'),
+
+        ]);
+
+        return redirect()->route('survey', ['token' => $tokenModel->token]);
     }
 
     public function edit($id)

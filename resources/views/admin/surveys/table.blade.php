@@ -22,7 +22,7 @@
             'checkbox' => 'selectedSurveys',
             'columns' => [
                 ['alias' => 'name', 'text' => 'Nazwa ankiety', 'sort' => true],
-                ['alias' => 'description', 'text' => 'Opis', 'sort' => true],
+                ['alias' => 'description', 'text' => 'Opis', 'sort' => true, 'view' => 'admin.surveys.table-row-description'],
                 ['alias' => 'created_at', 'text' => 'Data utworzenia', 'sort' => true],
                 [
                     'alias' => 'actions', 'text' => 'Szczegóły', 'sort' => false, 'view' => 'admin.surveys.table-row-actions'

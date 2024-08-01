@@ -25,3 +25,4 @@ mix.sass('resources/' + layout + '/assets/' + layout + '/sass/app.scss', 'public
 mix.sass('resources/' + layout + '/assets/' + layout + '/sass/web-survey.scss', 'public/css');
 mix.copyDirectory('resources/assets/' + layout + '/fonts', 'public/fonts');
 mix.copyDirectory('resources/assets/' + layout + '/img', 'public/img');
+mix.copyDirectory('vendor/tinymce/tinymce', 'public/js/tinymce');

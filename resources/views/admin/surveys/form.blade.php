@@ -1,4 +1,7 @@
 @extends('_partials.layouts.admin')
+@section('header-scripts')
+    <script src="{{ asset('js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
+@endsection
 @section('header-title')
     Ankiety
 @endsection
@@ -105,7 +108,7 @@
                                         'label' => __('Opis ankiety'),
                                         'name' => 'description',
                                         'classes' => 'tinymce-init',
-                                        'value' => $survey->description ?? '',
+                                        'value' => htmlspecialchars_decode($survey->description ?? ''),
                                         'placeholder' => __('Opis ankiety')
                                     ]])
                                 </div>
