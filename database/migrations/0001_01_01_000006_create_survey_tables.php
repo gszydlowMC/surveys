@@ -45,9 +45,6 @@ return new class extends Migration
             $table->text('value')->nullable();
             $table->string('label')->nullable();
             $table->boolean('is_default')->nullable();
-            $table->boolean('is_radio')->nullable();
-            $table->boolean('is_checkbox')->nullable();
-            $table->boolean('is_select')->nullable();
             $table->smallInteger('position')->nullable();
             $table->timestamps();
         });

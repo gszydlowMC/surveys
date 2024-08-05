@@ -38,5 +38,11 @@ class SurveyQuestion extends Model
     {
         return $this->hasMany(SurveySection::class, 'before_question_id', 'id');
     }
+
+    public function isLast()
+    {
+        dd($this->survey->withCount('questions'));
+//        if($this->position === $this->survey->withCount('questions'))
+    }
 }
 

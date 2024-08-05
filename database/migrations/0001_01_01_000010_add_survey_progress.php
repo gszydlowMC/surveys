@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('survey_results', function (Blueprint $table) {
             $table->id();
             $table->foreignId('survey_token_id');
-            $table->smallInteger('survey_question_position')->nullable();
+            $table->foreignId('survey_question_id')->nullable();
             $table->text('value')->nullable();
 
             $table->boolean('is_start')->nullable();
@@ -24,6 +24,10 @@ return new class extends Migration
             $table->timestamps();
         });
 
+//        Schema::table('survey_tokens', function (Blueprint $table) {
+//            $table->foreignId('subscriber_id')->nullable()->change();
+//            $table->foreignId('user_id')->nullable()->after('subscriber_id')->nullable();
+//        });
 
     }
 
@@ -32,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-
+        Schema::dropIfExists('survey_results');
     }
 };

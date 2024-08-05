@@ -13,15 +13,15 @@ class WebSurveyService extends BaseService
 
     }
 
-    public function saveSurveyResult($tokenId, $questionPosition = null, $value = null, $isStart = false, $isEnd = false)
+    public function saveSurveyResult($tokenId, $questionId = null, $value = null, $isStart = false, $isEnd = false)
     {
         $surveyResult = SurveyResult::query()->newQuery()->newModelInstance();
         $data = [
             'survey_token_id' => $tokenId,
-            'survey_question_position' => $questionPosition ?? null,
+            'survey_question_id' => $questionId ?? null,
             'value' => $value ?? null,
-            'is_start' => $is_start ?? null,
-            'is_end' => $is_end ?? null,
+            'is_start' => $isStart ?? null,
+            'is_end' => $isEnd ?? null,
             'ip' => request()->ip(),
             'created_at' => now()->format('Y-m-d H:i:s'),
         ];

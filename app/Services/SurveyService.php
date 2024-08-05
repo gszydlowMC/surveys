@@ -100,9 +100,6 @@ class SurveyService extends BaseService
                             'value' => $optionLabel,
                             'label' => $optionLabel,
                             'position' => $i,
-                            'is_radio' => ($inputData['question']['type'][$k] === SurveyQuestionTypeEnum::ONCE_LIST) ? true : false,
-                            'is_checkbox' => ($inputData['question']['type'][$k] === SurveyQuestionTypeEnum::MULTI_LIST) ? true : false,
-                            'is_select' => ($inputData['question']['type'][$k] === SurveyQuestionTypeEnum::SELECT) ? true : false,
                             'created_at' => now()->format('Y-m-d H:i:s'),
                         ];
 

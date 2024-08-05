@@ -18,9 +18,6 @@ class SurveyQuestionOption extends Model
         'value',
         'label',
         'is_default',
-        'is_radio',
-        'is_checkbox',
-        'is_select',
         'position',
     ];
 

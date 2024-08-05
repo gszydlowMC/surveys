@@ -38,7 +38,7 @@ class SurveyToken extends Model
 
     public function lastResult()
     {
-        return $this->hasOne(SurveyResult::class)->orderByDesc('created_at')->limit(1);
+        return $this->hasOne(SurveyResult::class)->latest();
     }
 }
 

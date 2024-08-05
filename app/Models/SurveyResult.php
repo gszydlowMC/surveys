@@ -30,7 +30,12 @@ class SurveyResult extends Model
 
     public function surveyToken()
     {
-        return $this->belongsTo(SurveyToken::class);
+        return $this->belongsTo(SurveyToken::class, 'survey_token_id');
+    }
+
+    public function question()
+    {
+        return $this->belongsTo(SurveyQuestion::class, 'survey_question_id');
     }
 }
 
